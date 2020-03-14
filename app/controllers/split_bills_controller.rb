@@ -1,0 +1,2 @@
+class SplitBillsController < ApplicationController
+end
