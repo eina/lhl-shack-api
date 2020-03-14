@@ -5,6 +5,5 @@ class AddUserDetails < ActiveRecord::Migration
     add_column :users, :phone_number, :string
     add_column :users, :email, :string
     add_column :users, :password, :string
-
   end
 end
