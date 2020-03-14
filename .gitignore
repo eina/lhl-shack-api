@@ -11,5 +11,9 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Env files
 .env
+
+# Misc files
 .DS_Store

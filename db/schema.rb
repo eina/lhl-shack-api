@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200314220320) do
+ActiveRecord::Schema.define(version: 20200314221832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20200314220320) do
     t.string   "phone_number"
     t.string   "email"
     t.string   "company"
+    t.string   "address"
   end
 
   create_table "split_bills", force: :cascade do |t|
