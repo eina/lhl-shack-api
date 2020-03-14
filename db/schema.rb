@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200314195249) do
+ActiveRecord::Schema.define(version: 20200314201928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "agreements", force: :cascade do |t|
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.jsonb    "form_values"
+    t.boolean  "is_complete"
+    t.boolean  "is_expired"
+  end
 
   create_table "bills", force: :cascade do |t|
     t.datetime "created_at",   null: false
@@ -23,6 +31,12 @@ ActiveRecord::Schema.define(version: 20200314195249) do
     t.date     "due_date"
     t.string   "name"
     t.string   "interval"
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "s3_identifier"
   end
 
   create_table "households", force: :cascade do |t|
