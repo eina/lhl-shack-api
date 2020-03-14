@@ -80,6 +80,7 @@ GEM
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
     pg (0.21.0)
+    pgcrypto (0.4.1)
     rack (1.6.13)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -161,6 +162,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   pg (~> 0.15)
+  pgcrypto
   rails (= 4.2.6)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
