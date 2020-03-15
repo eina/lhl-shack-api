@@ -14,6 +14,7 @@ end
 
 10.times do
   rand_start_date = time_rand Time.local(2018, 1, 1)
+  rand_bill_due_date = time_rand Time.local(2020, 1, 1)
 
   @landlord = Landlord.create!(
     first_name: FFaker::Name.first_name,
@@ -32,7 +33,7 @@ end
     password: FFaker::Internet.password
   )
 
-  Household.create(
+  @household = Household.create(
     total_rent_amt: rand(1234..10000),
     total_security_deposit_amt: rand(1234..10000),
     address: "#{FFaker::AddressCA.street_address}, #{FFaker::AddressCA.city}, #{FFaker::AddressCA.province}, #{FFaker::AddressCA.postal_code}",
@@ -45,10 +46,32 @@ end
     landlord_id: @landlord.id,
     user_id: @user.id
   )
+
+  Agreement.create(
+    household_id: @household.id,
+    form_values: "{\"test\":\"#{FFaker::Lorem.phrase}\"}",
+    is_complete: FFaker::Boolean.maybe,
+    is_expired: FFaker::Boolean.maybe
+  )
+
+  @bill = Bill.create(
+    household_id: @household.id,
+    total_amount: rand(5..800),
+    due_date: rand_bill_due_date,
+    name: FFaker::Movie.title,
+    interval: rand(30..60)
+  )
+
+  SplitBill.create(
+    bill_id: @bill.id,
+    user_id: @user.id,
+    bill_portion: rand(5..800)
+  )
 end
 
 puts "User records created: #{User.count}"
 puts "Landlord records created: #{Landlord.count}"
 puts "Household records created: #{Household.count}"
-
-# Agreement.create!(form_values: "{\"test\":\"hi\"}", is_complete: false, is_expired: false)
+puts "Agreement records created: #{Agreement.count}"
+puts "Bill records created: #{Bill.count}"
+puts "SplitBill records created: #{SplitBill.count}"
