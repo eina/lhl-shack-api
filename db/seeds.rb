@@ -5,23 +5,50 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'ffaker'
+
+# https://stackoverflow.com/questions/4894198/how-to-generate-a-random-date-in-ruby
+def time_rand from = 0.0, to = Time.now
+  Time.at(from + rand * (to.to_f - from.to_f)).to_date
+end
+
+10.times do
+  rand_start_date = time_rand Time.local(2018, 1, 1)
+
+  @landlord = Landlord.create!(
+    first_name: FFaker::Name.first_name,
+    last_name: FFaker::Name.last_name,
+    phone_number: FFaker::PhoneNumber.phone_number.to_s,
+    address: "#{FFaker::AddressCA.street_address}, #{FFaker::AddressCA.city}, #{FFaker::AddressCA.province}, #{FFaker::AddressCA.postal_code}",
+    email: FFaker::Internet.email,
+    company: FFaker::Company.name
+  )
+
+  @user = User.create!(
+    first_name: FFaker::Name.first_name,
+    last_name: FFaker::Name.last_name,
+    phone_number: FFaker::PhoneNumber.phone_number.to_s,
+    email: FFaker::Internet.email,
+    password: FFaker::Internet.password
+  )
+
+  Household.create(
+    total_rent_amt: rand(1234..10000),
+    total_security_deposit_amt: rand(1234..10000),
+    address: "#{FFaker::AddressCA.street_address}, #{FFaker::AddressCA.city}, #{FFaker::AddressCA.province}, #{FFaker::AddressCA.postal_code}",
+    number_of_rooms: rand(3..10),
+    number_of_bathrooms: rand(3..10),
+    pet_friendly: FFaker::Boolean.maybe,
+    smoking_allowed: FFaker::Boolean.maybe,
+    start_date: rand_start_date, 
+    end_date: rand_start_date.next_year - 1.day,
+    landlord_id: @landlord.id,
+    user_id: @user.id
+  )
+end
+
+puts "User records created: #{User.count}"
+puts "Landlord records created: #{Landlord.count}"
+puts "Household records created: #{Household.count}"
 
 # Agreement.create!(form_values: "{\"test\":\"hi\"}", is_complete: false, is_expired: false)
-
-# puts "Agreement Count: #{Agreement.all.count}"
-# puts "Created: #{Agreement.order("created_at").last}"
-
-# Household.create!(
-#   total_rent_amt: 4000, 
-#   total_security_deposit_amt: 8000, 
-#   address: "string", 
-#   number_of_rooms: 5, 
-#   number_of_bathrooms: 2.5, 
-#   pet_friendly: true, 
-#   smoking_allowed: false, 
-#   start_date: Date.new(2020, 01, 01), 
-#   end_date: Date.new(2020, 12, 31)
-# )
-
-# puts "Household Count: #{Household.all.count}"
-# puts "Created: #{Household.order("created_at").last}"
