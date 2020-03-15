@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# test for households
+Agreement.create!(form_values: "{\"test\":\"hi\"}", is_complete: false, is_expired: false)
+
+puts "Agreement Count: #{Agreement.all.count}"
+puts "Created: #{Agreement.order("created_at").last}"

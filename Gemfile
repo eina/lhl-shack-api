@@ -36,9 +36,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pgcrypto'
 
 # Generate foreign keys for associations
-gem 'immigrant'
-
-
+# gem 'immigrant'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
