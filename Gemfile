@@ -35,6 +35,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Generate UUID for PostgreSQL
 gem 'pgcrypto'
 
+# Generate foreign keys for associations
+gem 'immigrant'
+
 
 
 group :development, :test do
