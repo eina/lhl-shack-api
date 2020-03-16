@@ -29,11 +29,11 @@ class DocumentsController < ApplicationController
   end
 
   private 
-    def set_households
+    def set_documents
       @document = document.find(params[:id])
     end
 
-    def household_params
+    def document_params
       params.require(:document).permit(:s3_identifier)
     end
 end
