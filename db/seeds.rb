@@ -5,7 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
 require 'ffaker'
 
 # https://stackoverflow.com/questions/4894198/how-to-generate-a-random-date-in-ruby
