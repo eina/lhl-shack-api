@@ -34,6 +34,6 @@ class SplitBillsController < ApplicationController
           end
       
           def split_bill_params
-            params.require(:split_bill).permit(:bill_portion)
+            params.require(:split_bill).permit(:bill_portion,  bill_id: @bill.id, user_id: @user.id)
           end
 end
