@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-    # GET /landlords
+    # GET /Users
     def index 
-      @landlords = Landlord.all
+      @users = User.all
     end
   
     def show
