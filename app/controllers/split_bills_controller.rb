@@ -9,7 +9,7 @@ class SplitBillsController < ApplicationController
       
         def create
           @split_bill = Split_bill.new(split_bill_params)
-          if @Bill.save
+          if @split_bill.save
             render :show, status: :created, location: @split_bill
           else 
             render json: @split_bill.errors, status: :unprocessable_entity
@@ -34,6 +34,6 @@ class SplitBillsController < ApplicationController
           end
       
           def split_bill_params
-            params.require(:split_bill).permit(:bill_portion,  bill_id: @bill.id, user_id: @user.id)
+            params.require(:split_bill).permit(:bill_portion, :bill_id, :user_id)
           end
 end

@@ -9,7 +9,7 @@ class HouseholdsController < ApplicationController
     
       def create
         @household = Household.new(user_params)
-        if @Household.save
+        if @household.save
           render :show, status: :created, location: @household
         else 
           render json: @household.errors, status: :unprocessable_entity
@@ -35,6 +35,6 @@ class HouseholdsController < ApplicationController
     
         def household_params
           # do we add in Foreign Keys? i.e. user_id and landlord_id here?
-          params.require(:household).permit(:total_rent_amt, :total_security_deposit_amt, :address, :number_of_rooms, :number_of_bathrooms, :pet_friendly, :smoking_allowed, :start_date, :end_date)
+          params.require(:household).permit(:total_rent_amt, :total_security_deposit_amt, :address, :number_of_rooms, :number_of_bathrooms, :pet_friendly, :smoking_allowed, :start_date, :end_date, :user_id, :landlord_id)
         end
 end

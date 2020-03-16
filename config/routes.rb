@@ -5,25 +5,10 @@ Rails.application.routes.draw do
   # put all api routes inside the namespace for "api/x"
   scope :api do
     resources :landlords, defaults: { format: :json }
-  end
-
-  scope :api do
     resources :users, defaults: { format: :json }
-  end
-
-  scope :api do
-    resources :agreements, defaults: { format: :json }
-  end
-
-  scope :api do
-    resources :bills, defaults: { format: :json }
-  end
-
-  scope :api do
     resources :households, defaults: { format: :json }
-  end
-
-  scope :api do
+    resources :agreements, defaults: { format: :json }
+    resources :bills, defaults: { format: :json }
     resources :split_bills, defaults: { format: :json }
   end
 

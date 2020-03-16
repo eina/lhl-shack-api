@@ -9,7 +9,7 @@ class DocumentsController < ApplicationController
 
   def create
     @document = Document.new(document_params)
-    if @Document.save
+    if @document.save
       render :show, status: :created, location: @document
     else 
       render json: @document.errors, status: :unprocessable_entity
@@ -34,6 +34,6 @@ class DocumentsController < ApplicationController
     end
 
     def document_params
-      params.require(:document).permit(:s3_identifier)
+      params.require(:document).permit(:s3_identifier, :household_id)
     end
 end
