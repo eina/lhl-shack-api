@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  housekeeping_values: 
+  household_id: 
+
+two:
+  housekeeping_values: 
+  household_id: 

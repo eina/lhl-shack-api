@@ -1,4 +1,5 @@
 class Household < ActiveRecord::Base
+  has_one :housekeepings
   has_many :bills
   has_many :agreements
   has_many :documents
