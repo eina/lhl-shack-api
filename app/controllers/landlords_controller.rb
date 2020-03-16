@@ -4,15 +4,18 @@ class LandlordsController < ApplicationController
   # GET /landlords
   def index 
     @landlords = Landlord.all
+    render json: @landlords
   end
 
   def show
+    render json: @landlord
   end
 
   def create
     @landlord = Landlord.new(landlord_params)
     if @landlord.save
-      render :show, status: :created, location: @landlord
+      render json: @landlord, status: :created
+      # render :show, status: :created, location: @landlord
     else 
       render json: @landlord.errors, status: :unprocessable_entity
     end
@@ -20,9 +23,10 @@ class LandlordsController < ApplicationController
 
   def update
     if @landlord.update(landlord_params)
-      render :show, status: :ok, location: @landlord
+      render json: @landlord, status: :ok
+      # render :show, status: :ok, location: @landlord
     else 
-      render json: @todo.errors, status: unprocessable_entity
+      render json: @landlord.errors, status: unprocessable_entity
     end
   end
 

@@ -1,1 +1,1 @@
-json.partial! "landlords/landlord", landlord: @landlord
+# json.partial! "landlords/landlord", landlord: @landlord

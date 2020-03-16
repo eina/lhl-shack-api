@@ -4,5 +4,6 @@ class Household < ActiveRecord::Base
   has_many :documents
   belongs_to :users
   belongs_to :landlords
-  validates_presence_of :total_rent_amt, :total_security_deposit_amt, :address, :number_of_rooms, :number_of_bathrooms, :pet_friendly, :smoking_allowed, :start_date, :end_date
+  
+  validates_presence_of :total_rent_amt, :total_security_deposit_amt, :address, :number_of_rooms, :number_of_bathrooms, :start_date, :end_date
 end
