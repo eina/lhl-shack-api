@@ -7,6 +7,27 @@ Rails.application.routes.draw do
     resources :landlords, defaults: { format: :json }
   end
 
+  scope :api do
+    resources :users, defaults: { format: :json }
+  end
+
+  scope :api do
+    resources :agreements, defaults: { format: :json }
+  end
+
+  scope :api do
+    resources :bills, defaults: { format: :json }
+  end
+
+  scope :api do
+    resources :households, defaults: { format: :json }
+  end
+
+  scope :api do
+    resources :split_bills, defaults: { format: :json }
+  end
+
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
