@@ -2,7 +2,8 @@ class HouseholdsController < ApplicationController
   before_action :set_households, only: [:show, :update, :destroy]
       # GET /Households
       def index 
-        @households = Households.all
+        @households = Household.all
+        render json: @households
       end
     
       def show
@@ -11,7 +12,8 @@ class HouseholdsController < ApplicationController
       def create
         @household = Household.new(user_params)
         if @household.save
-          render :show, status: :created, location: @household
+          render json: @household, status: :created
+          # render :show, status: :created, location: @household
         else 
           render json: @household.errors, status: :unprocessable_entity
         end
@@ -19,7 +21,8 @@ class HouseholdsController < ApplicationController
     
       def update
         if @household.update(household_params)
-          render :show, status: :ok, location: @household
+          render json: @household, status: :ok
+          # render :show, status: :ok, location: @household
         else 
           render json: @household.errors, status: unprocessable_entity
         end
@@ -31,7 +34,7 @@ class HouseholdsController < ApplicationController
     
       private 
         def set_households
-          @household = household.find(params[:id])
+          @household = Household.find(params[:id])
         end
     
         def household_params

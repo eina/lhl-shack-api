@@ -2,7 +2,7 @@ class AgreementsController < ApplicationController
   before_action :set_agreements, only: [:show, :update, :destroy]
     # GET /Agreements
     def index 
-      @agreements = Agreements.all
+      @agreements = Agreement.all
     end
   
     def show
@@ -10,8 +10,12 @@ class AgreementsController < ApplicationController
   
     def create
       @agreement = Agreement.new(agreement_params)
-      if @Agreement.save
-        render :show, status: :created, location: @agreement
+      if @agreement.save
+        pdf = WickedPdf.new.pdf_from_string('<h1>Hello There!</h1>')
+        send_data pdf, filename: 'file_name.pdf'
+
+        # render json: @agreement, status: :created
+        # render :show, status: :created, location: @agreement
       else 
         render json: @agreement.errors, status: :unprocessable_entity
       end
@@ -19,7 +23,8 @@ class AgreementsController < ApplicationController
   
     def update
       if @agreement.update(agreement_params)
-        render :show, status: :ok, location: @agreement
+        render json: @agreement, status: :ok
+        # render :show, status: :ok, location: @agreement
       else 
         render json: @agreement.errors, status: unprocessable_entity
       end
@@ -27,11 +32,11 @@ class AgreementsController < ApplicationController
   
     def destroy
       @agreement.destroy
-    end
+    end    
   
     private 
       def set_agreements
-        @agreement = agreement.find(params[:id])
+        @agreement = Agreement.find(params[:id])
       end
   
       def agreement_params
