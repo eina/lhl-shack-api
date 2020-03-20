@@ -1,4 +1,5 @@
 class SplitBillsController < ApplicationController
+  before_action :set_split_bills, only: [:show, :update, :destroy]
         # GET /Split_bills
         def index 
           @split_bills = Split_bill.all

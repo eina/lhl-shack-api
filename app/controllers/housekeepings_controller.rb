@@ -1,5 +1,5 @@
 class HousekeepingsController < ApplicationController
-    before_action :set_landlords, only: [:show, :update, :destroy]
+    before_action :housekeepings, only: [:show, :update, :destroy]
 
   # GET /landlords
   def index 

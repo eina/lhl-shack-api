@@ -1,4 +1,5 @@
 class HouseholdsController < ApplicationController
+  before_action :set_households, only: [:show, :update, :destroy]
       # GET /Households
       def index 
         @households = Households.all

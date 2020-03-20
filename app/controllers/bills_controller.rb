@@ -1,4 +1,5 @@
 class BillsController < ApplicationController
+  before_action :set_bills, only: [:show, :update, :destroy]
       # GET /Bills
       def index 
         @bills = Bill.all
