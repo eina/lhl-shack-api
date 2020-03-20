@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   scope :api do
     resources :landlords, defaults: { format: :json }
     resources :users, defaults: { format: :json }
+      resources :account, defaults: { format: :json }
     resources :households, defaults: { format: :json }
     resources :agreements, defaults: { format: :json }    
     resources :bills, defaults: { format: :json }
