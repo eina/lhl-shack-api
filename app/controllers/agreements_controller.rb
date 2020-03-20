@@ -1,8 +1,11 @@
+require 'aws-sdk-s3'
+
 class AgreementsController < ApplicationController
   before_action :set_agreements, only: [:show, :update, :destroy]
     # GET /Agreements
     def index 
       @agreements = Agreement.all
+      render json: @agreements
     end
   
     def show
@@ -10,9 +13,22 @@ class AgreementsController < ApplicationController
   
     def create
       @agreement = Agreement.new(agreement_params)
+
+      # initialize s3      
+      s3 = Aws::S3::Resource.new(region:'us-west-2')
+      
       if @agreement.save
+        # generate pdf        
         pdf = WickedPdf.new.pdf_from_string('<h1>Hello There!</h1>')
-        send_data pdf, filename: 'file_name.pdf'
+        filename = 'test.pdf'
+
+        send_data pdf, filename: filename
+      
+        obj = s3.bucket('lhl-shack').object(filename)
+        obj.put(body: pdf)
+
+        # obj.upload_file('test.pdf')
+        
 
         # render json: @agreement, status: :created
         # render :show, status: :created, location: @agreement

@@ -42,6 +42,8 @@ gem 'pgcrypto'
 gem 'wicked_pdf'
 # wkhtmltopdf for wicked_pdf
 gem 'wkhtmltopdf-binary'
+# AWS-SDK
+gem 'aws-sdk'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
