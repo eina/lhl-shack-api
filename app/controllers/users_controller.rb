@@ -4,15 +4,17 @@ class UsersController < ApplicationController
     # GET /Users
     def index 
       @users = User.all
+      render json: @users
     end
   
     def show
+      render json: @user
     end
   
     def create
       @user = User.new(user_params)
       if @user.save
-        render :show, status: :created, location: @user
+        render json: @user, status: :created
       else 
         render json: @user.errors, status: :unprocessable_entity
       end
@@ -20,7 +22,7 @@ class UsersController < ApplicationController
   
     def update
       if @user.update(user_params)
-        render :show, status: :ok, location: @user
+        render json: @user, status: :ok
       else 
         render json: @user.errors, status: unprocessable_entity
       end
@@ -32,7 +34,7 @@ class UsersController < ApplicationController
   
     private 
       def set_users
-        @user = user.find(params[:id])
+        @user = User.find(params[:id])
       end
   
       def user_params
