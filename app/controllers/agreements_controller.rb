@@ -20,15 +20,15 @@ class AgreementsController < ApplicationController
       if @agreement.save
         # generate pdf        
         pdf = WickedPdf.new.pdf_from_string('<h1>Hello There!</h1>')
+        # generate a unique file name probably
         filename = 'test.pdf'
-
-        send_data pdf, filename: filename
-      
-        obj = s3.bucket('lhl-shack').object(filename)
-        obj.put(body: pdf)
-
-        # obj.upload_file('test.pdf')
         
+        #create in stream
+        send_data pdf, filename: filename
+        
+        # upload to S3
+        obj = s3.bucket(ENV['S3_BUCKET']).object(filename)
+        obj.put(body: pdf)                
 
         # render json: @agreement, status: :created
         # render :show, status: :created, location: @agreement
