@@ -1,4 +1,5 @@
 class DocumentsController < ApplicationController
+  before_action :set_documents, only: [:show, :update, :destroy]
   # GET /Documents
   def index 
     @documents = Documents.all

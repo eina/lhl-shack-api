@@ -1,4 +1,5 @@
 class AgreementsController < ApplicationController
+  before_action :set_agreements, only: [:show, :update, :destroy]
     # GET /Agreements
     def index 
       @agreements = Agreements.all
