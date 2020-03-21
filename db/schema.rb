@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200321213806) do
+ActiveRecord::Schema.define(version: 20200321221520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,11 +81,9 @@ ActiveRecord::Schema.define(version: 20200321213806) do
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "landlord_id",                null: false
-    t.integer  "user_id",                    null: false
   end
 
   add_index "houses", ["landlord_id"], name: "index_houses_on_landlord_id", using: :btree
-  add_index "houses", ["user_id"], name: "index_houses_on_user_id", using: :btree
 
   create_table "landlords", force: :cascade do |t|
     t.datetime "created_at",   null: false
@@ -126,7 +124,6 @@ ActiveRecord::Schema.define(version: 20200321213806) do
   add_foreign_key "households", "users"
   add_foreign_key "housekeepings", "households"
   add_foreign_key "houses", "landlords"
-  add_foreign_key "houses", "users"
   add_foreign_key "split_bills", "bills"
   add_foreign_key "split_bills", "users"
 end
