@@ -25,18 +25,20 @@ end
     company: FFaker::Company.name
   )
 
-  @user = User.create!(
-    first_name: 'Blimp'
-    last_name: "Guy"
+  @landlord = Landlord.create!(
+    first_name: FFaker::Name.first_name,
+    last_name: FFaker::Name.last_name,
     phone_number: FFaker::PhoneNumber.phone_number.to_s,
-    email: "iloveblimps@gmail.com"
-    password: FFaker::Internet.password
+    address: "#{FFaker::AddressCA.street_address}, #{FFaker::AddressCA.city}, #{FFaker::AddressCA.province}, #{FFaker::AddressCA.postal_code}",
+    email: FFaker::Internet.email,
+    company: FFaker::Company.name
   )
+
   @user = User.create!(
-    first_name: "Andy"
-    last_name: "Lindsay"
+    first_name: FFaker::Name.first_name,
+    last_name: FFaker::Name.last_name,
     phone_number: FFaker::PhoneNumber.phone_number.to_s,
-    email: "alindsay@gmail.com"
+    email: FFaker::Internet.email,
     password: FFaker::Internet.password
   )
 
@@ -51,8 +53,9 @@ end
     start_date: rand_start_date, 
     end_date: rand_start_date.next_year - 1.day,
     landlord_id: @landlord.id,
-    user_id: @user.id, @user.id
+    user_id: @user.id
   )
+
 
   Agreement.create(
     household_id: @household.id,
