@@ -56,16 +56,21 @@ end
     user_id: @user.id
   )
 
+  @household = Household.create(
+    house_id: @house.id
+    user_id: @user.id
+  )
+
 
   Agreement.create(
-    house_id: @house.id,
+    household_id: @household.id,
     form_values: "{\"test\":\"#{FFaker::Lorem.phrase}\"}",
     is_complete: FFaker::Boolean.maybe,
     is_expired: FFaker::Boolean.maybe
   )
 
   @bill = Bill.create(
-    house_id: @house.id,
+    household_id: @household.id,
     total_amount: rand(5..800),
     due_date: rand_bill_due_date,
     name: FFaker::Movie.title,
