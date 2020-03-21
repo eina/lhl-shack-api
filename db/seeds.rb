@@ -52,12 +52,40 @@ puts "test seed"
   landlord_id: @landlord.id
 )
 
-@user1.households.create(
+@household = @user1.households.create!(
   house_id: @house.id
 )
-@user2.households.create(
+@user2.households.create!(
   house_id: @house.id
 )
+
+Agreement.create!(
+  household_id: @household.id,
+  form_values: "{\"test\":\"#{FFaker::Lorem.phrase}\"}",
+  is_complete: FFaker::Boolean.maybe,
+  is_expired: FFaker::Boolean.maybe
+)
+
+@bill = Bill.create!(
+  household_id: @household.id,
+  total_amount: 80,
+  due_date: Date.parse("2020-04-01"),
+  name: "BC Hydro",
+  interval: "bi-monthly"
+)
+
+SplitBill.create!(
+  bill_id: @bill.id,
+  user_id: @user1.id,
+  bill_portion: 40
+)
+
+SplitBill.create!(
+  bill_id: @bill.id,
+  user_id: @user2.id,
+  bill_portion: 40
+)
+
 
 # puts "fake data"
 # 10.times do
@@ -135,6 +163,6 @@ puts "test seed"
 puts "User records created: #{User.count}"
 puts "Landlord records created: #{Landlord.count}"
 puts "house records created: #{House.count}"
-# puts "Agreement records created: #{Agreement.count}"
-# puts "Bill records created: #{Bill.count}"
-# puts "SplitBill records created: #{SplitBill.count}"
+puts "Agreement records created: #{Agreement.count}"
+puts "Bill records created: #{Bill.count}"
+puts "SplitBill records created: #{SplitBill.count}"
