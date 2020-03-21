@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
+  protect_from_forgery with: :null_session
   before_action :set_users, only: [:show, :update, :destroy]
 
     # GET /Users
@@ -24,7 +26,7 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         render json: @user, status: :ok
       else 
-        render json: @user.errors, status: unprocessable_entity
+        render json: @user.errors, status: :unprocessable_entity
       end
     end
   
