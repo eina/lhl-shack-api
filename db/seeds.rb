@@ -26,10 +26,17 @@ end
   )
 
   @user = User.create!(
-    first_name: FFaker::Name.first_name,
-    last_name: FFaker::Name.last_name,
+    first_name: 'Blimp'
+    last_name: "Guy"
     phone_number: FFaker::PhoneNumber.phone_number.to_s,
-    email: FFaker::Internet.email,
+    email: "iloveblimps@gmail.com"
+    password: FFaker::Internet.password
+  )
+  @user = User.create!(
+    first_name: "Andy"
+    last_name: "Lindsay"
+    phone_number: FFaker::PhoneNumber.phone_number.to_s,
+    email: "alindsay@gmail.com"
     password: FFaker::Internet.password
   )
 
@@ -44,7 +51,7 @@ end
     start_date: rand_start_date, 
     end_date: rand_start_date.next_year - 1.day,
     landlord_id: @landlord.id,
-    user_id: @user.id
+    user_id: @user.id, @user.id
   )
 
   Agreement.create(
