@@ -38,6 +38,6 @@ class HousekeepingsController < ApplicationController
     end
 
     def housekeeping_params
-      params.require(:housekeeping).permit(:housekeeping_values, :household_id)
+      params.require(:housekeeping).permit(:housekeeping_values, :house_id)
     end
 end

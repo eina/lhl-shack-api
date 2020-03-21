@@ -35,6 +35,6 @@ class AgreementsController < ApplicationController
       end
   
       def agreement_params
-        params.require(:agreement).permit(:form_values, :is_complete, :is_expired, :household_id)
+        params.require(:agreement).permit(:form_values, :is_complete, :is_expired, :house_id)
       end
 end

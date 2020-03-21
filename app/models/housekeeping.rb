@@ -1,3 +1,3 @@
 class Housekeeping < ActiveRecord::Base
-  belongs_to :household
+  belongs_to :house
 end

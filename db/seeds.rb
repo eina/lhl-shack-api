@@ -42,7 +42,7 @@ end
     password: FFaker::Internet.password
   )
 
-  @household = Household.create(
+  @house = House.create(
     total_rent_amt: rand(1234..10000),
     total_security_deposit_amt: rand(1234..10000),
     address: "#{FFaker::AddressCA.street_address}, #{FFaker::AddressCA.city}, #{FFaker::AddressCA.province}, #{FFaker::AddressCA.postal_code}",
@@ -58,14 +58,14 @@ end
 
 
   Agreement.create(
-    household_id: @household.id,
+    house_id: @house.id,
     form_values: "{\"test\":\"#{FFaker::Lorem.phrase}\"}",
     is_complete: FFaker::Boolean.maybe,
     is_expired: FFaker::Boolean.maybe
   )
 
   @bill = Bill.create(
-    household_id: @household.id,
+    house_id: @house.id,
     total_amount: rand(5..800),
     due_date: rand_bill_due_date,
     name: FFaker::Movie.title,
@@ -81,7 +81,7 @@ end
 
 puts "User records created: #{User.count}"
 puts "Landlord records created: #{Landlord.count}"
-puts "Household records created: #{Household.count}"
+puts "house records created: #{House.count}"
 puts "Agreement records created: #{Agreement.count}"
 puts "Bill records created: #{Bill.count}"
 puts "SplitBill records created: #{SplitBill.count}"

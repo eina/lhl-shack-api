@@ -35,6 +35,6 @@ class DocumentsController < ApplicationController
     end
 
     def document_params
-      params.require(:document).permit(:s3_identifier, :household_id)
+      params.require(:document).permit(:s3_identifier, :house_id)
     end
 end
