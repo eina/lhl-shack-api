@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200321203756) do
+ActiveRecord::Schema.define(version: 20200321210702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(version: 20200321203756) do
   end
 
   add_index "documents", ["household_id"], name: "index_documents_on_household_id", using: :btree
+
+  create_table "households", force: :cascade do |t|
+    t.integer  "user_id"
+    t.uuid     "house_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "households", ["house_id"], name: "index_households_on_house_id", using: :btree
+  add_index "households", ["user_id"], name: "index_households_on_user_id", using: :btree
 
   create_table "housekeepings", force: :cascade do |t|
     t.jsonb    "housekeeping_values"
@@ -112,6 +122,8 @@ ActiveRecord::Schema.define(version: 20200321203756) do
   add_foreign_key "agreements", "houses", column: "household_id"
   add_foreign_key "bills", "houses", column: "household_id"
   add_foreign_key "documents", "houses", column: "household_id"
+  add_foreign_key "households", "houses"
+  add_foreign_key "households", "users"
   add_foreign_key "housekeepings", "houses", column: "household_id"
   add_foreign_key "houses", "landlords"
   add_foreign_key "houses", "users"
