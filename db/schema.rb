@@ -11,22 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200321210702) do
+ActiveRecord::Schema.define(version: 20200321213026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
 
   create_table "agreements", id: :uuid, default: "gen_random_uuid()", force: :cascade do |t|
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.jsonb    "form_values"
     t.boolean  "is_complete"
     t.boolean  "is_expired"
-    t.uuid     "household_id", null: false
   end
-
-  add_index "agreements", ["household_id"], name: "index_agreements_on_household_id", using: :btree
 
   create_table "bills", force: :cascade do |t|
     t.datetime "created_at",   null: false
@@ -35,19 +32,13 @@ ActiveRecord::Schema.define(version: 20200321210702) do
     t.date     "due_date"
     t.string   "name"
     t.string   "interval"
-    t.uuid     "household_id", null: false
   end
-
-  add_index "bills", ["household_id"], name: "index_bills_on_household_id", using: :btree
 
   create_table "documents", force: :cascade do |t|
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "s3_identifier"
-    t.uuid     "household_id",  null: false
   end
-
-  add_index "documents", ["household_id"], name: "index_documents_on_household_id", using: :btree
 
   create_table "households", force: :cascade do |t|
     t.integer  "user_id"
@@ -61,12 +52,9 @@ ActiveRecord::Schema.define(version: 20200321210702) do
 
   create_table "housekeepings", force: :cascade do |t|
     t.jsonb    "housekeeping_values"
-    t.uuid     "household_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end
-
-  add_index "housekeepings", ["household_id"], name: "index_housekeepings_on_household_id", using: :btree
 
   create_table "houses", id: :uuid, default: "gen_random_uuid()", force: :cascade do |t|
     t.datetime "created_at",                 null: false
@@ -119,12 +107,8 @@ ActiveRecord::Schema.define(version: 20200321210702) do
     t.string   "password"
   end
 
-  add_foreign_key "agreements", "houses", column: "household_id"
-  add_foreign_key "bills", "houses", column: "household_id"
-  add_foreign_key "documents", "houses", column: "household_id"
   add_foreign_key "households", "houses"
   add_foreign_key "households", "users"
-  add_foreign_key "housekeepings", "houses", column: "household_id"
   add_foreign_key "houses", "landlords"
   add_foreign_key "houses", "users"
   add_foreign_key "split_bills", "bills"
