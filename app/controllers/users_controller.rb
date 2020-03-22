@@ -10,7 +10,17 @@ class UsersController < ApplicationController
     end
   
     def show
-      render json: @user
+      @household = Household.find_by(user_id: @user.id)      
+      
+      # if user has no household
+      if @household.blank? 
+        render json: @user        
+        # render json: @user.errors, status: :forbidden
+      else         
+        # raise @user.households.inspect
+        render :show, status: :created, location: @user
+        # render json: output        
+      end                
     end
   
     def create
