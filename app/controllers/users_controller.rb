@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_action :verify_authenticity_token
-  protect_from_forgery with: :null_session
+  # skip_before_action :verify_authenticity_token
+  # protect_from_forgery with: :null_session
   before_action :set_users, only: [:show, :update, :destroy]
 
     # GET /Users
@@ -10,17 +10,9 @@ class UsersController < ApplicationController
     end
   
     def show
-      @household = Household.find_by(user_id: @user.id)      
-      
-      # if user has no household
-      if @household.blank? 
-        render json: @user        
-        # render json: @user.errors, status: :forbidden
-      else         
-        # raise @user.households.inspect
-        render :show, status: :created, location: @user
-        # render json: output        
-      end                
+      household = Household.find_by(user_id: @user.id)      
+      # if @household.blank?       
+      @output = { user: @user, household: household.id }    
     end
   
     def create
