@@ -5,4 +5,4 @@ require File.expand_path('../application', __FILE__)
 Rails.application.initialize!
 
 # Jbuilder config
-Jbuilder.key_format camelize: :lower
+# Jbuilder.key_format camelize: :lower
