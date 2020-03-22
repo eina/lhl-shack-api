@@ -39,8 +39,7 @@ class AgreementsController < ApplicationController
         household_id = params[:household]        
         
         if household_id
-          @agreement = Agreement.find_by(household_id: household_id)
-          raise household_agreement.inspect
+          household_agreement = Agreement.find_by(household_id: household_id)          
         else 
           @agreement = Agreement.find(params[:id])
         end
