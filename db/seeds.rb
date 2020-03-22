@@ -62,8 +62,8 @@ puts "test seed"
 Agreement.create!(
   household_id: @household.id,
   form_values: "{\"test\":\"#{FFaker::Lorem.phrase}\"}",
-  is_complete: FFaker::Boolean.maybe,
-  is_expired: FFaker::Boolean.maybe
+  is_complete: false,
+  is_expired: true
 )
 
 @bill = Bill.create!(
