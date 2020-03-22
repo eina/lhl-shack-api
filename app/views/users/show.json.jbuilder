@@ -1,4 +1,4 @@
-json.key_format! camelize: :lower
+# json.key_format! camelize: :lower
 
 json.id @output[:user][:id]
 json.first_name @output[:user][:first_name]

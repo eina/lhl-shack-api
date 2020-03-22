@@ -13,6 +13,9 @@ class UsersController < ApplicationController
       household = Household.find_by(user_id: @user.id)      
       # if @household.blank?       
       @output = { user: @user, household: household.id }    
+      # render :show, status: :ok, location: @user
+      
+      render json: @output.as_json(except: [:created_at, :updated_at])
     end
   
     def create
