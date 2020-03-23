@@ -14,7 +14,6 @@ class UsersController < ApplicationController
       # if @household.blank?       
       @output = { user: @user, household: household.id }    
       render :show, status: :ok, location: @user
-            
     end
   
     def create
