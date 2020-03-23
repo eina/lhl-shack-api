@@ -1,8 +1,14 @@
 class AgreementsController < ApplicationController
   before_action :set_agreements, only: [:show, :update, :destroy]
     # GET /Agreements
-    def index             
-      @agreements = Agreement.all
+    def index        
+      household_id = params[:household_id]
+      if household_id.empty?
+        @agreements = Agreement.all
+      else 
+        # GET /api/agreements?household_id=params[:household_id]
+        @agreements = Agreement.find_by(household_id: household_id)
+      end
       render json: @agreements      
     end
   
@@ -36,7 +42,7 @@ class AgreementsController < ApplicationController
   
     private 
       def set_agreements                        
-        house_agreement = Agreement.find_by(household_id: params[:id])
+        house_agreement = Agreement.find_by(household_id: params[:id], is_expired: false)
         if house_agreement.blank?
           @agreement = Agreement.find(params[:id])
         else
