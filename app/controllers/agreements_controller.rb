@@ -1,12 +1,12 @@
 class AgreementsController < ApplicationController
   before_action :set_agreements, only: [:show, :update, :destroy]
     # GET /Agreements
-    def index 
+    def index             
       @agreements = Agreement.all
-      render json: @agreements
+      render json: @agreements      
     end
   
-    def show
+    def show      
       render json: @agreement
     end
   
@@ -35,13 +35,13 @@ class AgreementsController < ApplicationController
     end
   
     private 
-      def set_agreements
-        household_id = params[:household]        
-        
-        if household_id
-          household_agreement = Agreement.find_by(household_id: household_id)          
-        else 
+      def set_agreements                        
+        house_agreement = Agreement.find_by(household_id: params[:id])
+        if house_agreement.blank?
           @agreement = Agreement.find(params[:id])
+        else
+          # raise house_agreement.inspect
+          @agreement = Agreement.find_by(household_id: params[:id])
         end
       end
   
