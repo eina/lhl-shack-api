@@ -14,14 +14,14 @@
 
 puts "Generating test seed..."
 
-# @landlord = Landlord.create!(
-#   first_name: "Jared",
-#   last_name: "Palmer",
-#   phone_number: FFaker::PhoneNumber.phone_number.to_s,
-#   address: "#{FFaker::AddressCA.street_address}, #{FFaker::AddressCA.city}, #{FFaker::AddressCA.province}, #{FFaker::AddressCA.postal_code}",
-#   email: FFaker::Internet.email,
-#   company: FFaker::Company.name
-# )
+@landlord = Landlord.create!(
+  first_name: "Jared",
+  last_name: "Palmer",
+  phone_number: FFaker::PhoneNumber.phone_number.to_s,
+  address: "#{FFaker::AddressCA.street_address}, #{FFaker::AddressCA.city}, #{FFaker::AddressCA.province}, #{FFaker::AddressCA.postal_code}",
+  email: FFaker::Internet.email,
+  company: FFaker::Company.name
+)
 
 @user1 = User.create!(
   first_name: "Andy",
@@ -39,22 +39,24 @@ puts "Generating test seed..."
   # password: "test"
 # )
 
-# @house = House.create!(
-#   total_rent_amt: 2000,
-#   total_security_deposit_amt: 1000,
-#   address: "#{FFaker::AddressCA.street_address}, #{FFaker::AddressCA.city}, #{FFaker::AddressCA.province}, #{FFaker::AddressCA.postal_code}",
-#   number_of_rooms: 2,
-#   number_of_bathrooms: 1,
-#   pet_friendly: FFaker::Boolean.maybe,
-#   smoking_allowed: FFaker::Boolean.maybe,
-#   start_date: Date.parse("2019-08-01"),
-#   end_date: Date.parse("2020-08-01"),
-#   landlord_id: @landlord.id
-# )
+@house = House.create!(
+  total_rent_amt: 2000,
+  total_security_deposit_amt: 1000,
+  address: "#{FFaker::AddressCA.street_address}, #{FFaker::AddressCA.city}, #{FFaker::AddressCA.province}, #{FFaker::AddressCA.postal_code}",
+  number_of_rooms: 2,
+  number_of_bathrooms: 1,
+  pet_friendly: FFaker::Boolean.maybe,
+  smoking_allowed: FFaker::Boolean.maybe,  
+  landlord_id: @landlord.id
+)
 
-# @household = @user1.households.create!(
-#   house_id: @house.id
-# )
+@household = @user1.households.create!(
+  house_id: @house.id,
+  start_date: Date.parse("2019-08-01"),
+  end_date: Date.parse("2020-08-01"),
+  is_active: true
+)
+
 # @user2.households.create!(
 #   house_id: @house.id
 # )
@@ -88,9 +90,9 @@ puts "Generating test seed..."
 
 
 puts "User records created: #{User.count}"
-# puts "Landlord records created: #{Landlord.count}"
-# puts "House records created: #{House.count}"
-# puts "Household records created: #{Household.count}"
+puts "Landlord records created: #{Landlord.count}"
+puts "House records created: #{House.count}"
+puts "Household records created: #{Household.count}"
 # puts "Agreement records created: #{Agreement.count}"
 # puts "Bill records created: #{Bill.count}"
 # puts "SplitBill records created: #{SplitBill.count}"
