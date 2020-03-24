@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200323232027) do
+ActiveRecord::Schema.define(version: 20200324000041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20200323232027) do
     t.boolean  "is_complete"
     t.boolean  "is_expired"
     t.integer  "household_id"
+    t.text     "html_string"
   end
 
   add_index "agreements", ["household_id"], name: "index_agreements_on_household_id", using: :btree
