@@ -1,7 +1,5 @@
-class User < ActiveRecord::Base
-  # has_many :split_bills, foreign_key: "user_id"
-  # has_many :bills, through: :split_bills, foreign_key: "user_id"
-
+class User < ActiveRecord::Base    
+  has_many :bills, foreign_key: "user_id"
   has_many :households, foreign_key: "user_id"
   has_many :houses, through: :households, foreign_key: "user_id"
   

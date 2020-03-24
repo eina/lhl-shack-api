@@ -1,6 +1,7 @@
 class Bill < ActiveRecord::Base
   belongs_to :households
-
+  belongs_to :users
+  
   # has_many :split_bills
   # has_many :users, through: :split_bills
   # accepts_nested_attributes_for :split_bills, reject_if: proc { |attributes| attributes['bill_portion'].blank? }
