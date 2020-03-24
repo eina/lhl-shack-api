@@ -3,7 +3,7 @@ class AgreementsController < ApplicationController
     # GET /Agreements
     def index        
       household_id = params[:household_id]
-      if household_id.empty?
+      if household_id.blank?
         @agreements = Agreement.all
       else 
         # GET /api/agreements?household_id=params[:household_id]
@@ -18,6 +18,7 @@ class AgreementsController < ApplicationController
   
     def create
       @agreement = Agreement.new(agreement_params)
+      # raise @agreement.inspect
       if @agreement.save
         render json: @agreement, status: :created
         # render :show, status: :created, location: @agreement

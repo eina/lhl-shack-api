@@ -40,6 +40,6 @@ class LandlordsController < ApplicationController
     end
 
     def landlord_params
-      params.require(:landlord).permit(:first_name, :last_name, :phone_number, :email, :address)
+      params.require(:landlord).permit(:first_name, :last_name, :phone_number, :email, :address, :company)
     end
 end

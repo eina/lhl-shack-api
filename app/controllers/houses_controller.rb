@@ -11,7 +11,7 @@ class HousesController < ApplicationController
       end
     
       def create
-        @house = House.new(user_params)
+        @house = House.new(house_params)
         if @house.save
           render json: @house, status: :created
         else 

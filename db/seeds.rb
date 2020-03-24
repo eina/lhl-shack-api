@@ -26,7 +26,7 @@ puts "Generating test seed..."
 @user1 = User.create!(
   first_name: "Andy",
   last_name: "Lindsay",
-  phone_number: FFaker::PhoneNumber.phone_number.to_s,
+  phone_number: "876-237-2519",
   email: "test@test.com",
   password: "test"
 )
