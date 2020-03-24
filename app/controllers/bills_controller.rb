@@ -3,11 +3,20 @@ class BillsController < ApplicationController
       # GET /Bills
       def index 
         household_id = params[:household_id]
+        bill_uuid = params[:bill_uuid]
+
         if household_id.blank? 
           @bills = Bill.all
         else 
           @bills = Bill.where(household_id: household_id)
         end
+
+        if bill_uuid.blank?
+          @bills = Bill.all
+        else 
+          @bills = Bill.where(bill_uuid: bill_uuid)
+        end
+
         render json: @bills
       end
     
