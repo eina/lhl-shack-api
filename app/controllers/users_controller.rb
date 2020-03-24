@@ -5,7 +5,12 @@ class UsersController < ApplicationController
 
     # GET /Users
     def index 
-      @users = User.all
+      email = params[:email]
+      if email.blank?
+        @users = User.all
+      else
+        @users = User.where(email: email)
+      end
       render json: @users
     end
   
@@ -40,6 +45,7 @@ class UsersController < ApplicationController
   
     def destroy
       @user.destroy
+      render json: @user, status: :ok
     end
   
     private 

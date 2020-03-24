@@ -32,11 +32,11 @@ puts "Generating test seed..."
 )
 
 # @user2 = User.create!(
-#   first_name: "Travis",
-#   last_name: "Borsa",
-#   phone_number: FFaker::PhoneNumber.phone_number.to_s,
-#   email: "test2@test.com",
-#   password: "test"
+  # first_name: "Travis",
+  # last_name: "Borsa",
+  # phone_number: FFaker::PhoneNumber.phone_number.to_s,
+  # email: "test2@test.com",
+  # password: "test"
 # )
 
 # @house = House.create!(
