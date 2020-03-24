@@ -40,6 +40,6 @@ class HouseholdsController < ApplicationController
     end
 
     def household_params
-      params.require(:household).permit(:user_id, :house_id, :is_active, :start_date, :end_date)
+      params.require(:household).permit(:user_id, :house_id, :is_active, :start_date, :end_date, :housekeeping)
     end
 end
