@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200324063325) do
+ActiveRecord::Schema.define(version: 20200324194811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 20200324063325) do
     t.string   "name"
     t.string   "interval"
     t.integer  "household_id"
+    t.integer  "user_amount"
+    t.uuid     "bill_uuid"
   end
 
   add_index "bills", ["household_id"], name: "index_bills_on_household_id", using: :btree
@@ -90,17 +92,6 @@ ActiveRecord::Schema.define(version: 20200324063325) do
     t.string   "address"
   end
 
-  create_table "split_bills", force: :cascade do |t|
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "bill_portion"
-    t.integer  "user_id",      null: false
-    t.integer  "bill_id",      null: false
-  end
-
-  add_index "split_bills", ["bill_id"], name: "index_split_bills_on_bill_id", using: :btree
-  add_index "split_bills", ["user_id"], name: "index_split_bills_on_user_id", using: :btree
-
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -119,6 +110,4 @@ ActiveRecord::Schema.define(version: 20200324063325) do
   add_foreign_key "households", "houses"
   add_foreign_key "households", "users"
   add_foreign_key "houses", "landlords"
-  add_foreign_key "split_bills", "bills"
-  add_foreign_key "split_bills", "users"
 end
