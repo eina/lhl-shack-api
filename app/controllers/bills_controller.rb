@@ -2,7 +2,12 @@ class BillsController < ApplicationController
   before_action :set_bills, only: [:show, :update, :destroy]
       # GET /Bills
       def index 
-        @bills = Bill.all
+        household_id = params[:household_id]
+        if household_id.blank? 
+          @bills = Bill.all
+        else 
+          @bills = Bill.where(household_id: household_id)
+        end
         render json: @bills
       end
     
