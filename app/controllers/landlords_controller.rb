@@ -32,6 +32,7 @@ class LandlordsController < ApplicationController
 
   def destroy
     @landlord.destroy
+    render json: @split_bills, status: :ok
   end
 
   private 

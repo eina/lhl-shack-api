@@ -3,15 +3,19 @@ class BillsController < ApplicationController
       # GET /Bills
       def index 
         @bills = Bill.all
+        render json: @bills
       end
     
       def show
+        render json: @bill
       end
     
       def create
         @bill = Bill.new(bill_params)
-        if @Bill.save
-          render :show, status: :created, location: @bill
+        # @bill.split_bills.build        
+        if @bill.save
+          render json: @bill
+          # render :show, status: :created, location: @bill
         else 
           render json: @bill.errors, status: :unprocessable_entity
         end
@@ -19,7 +23,8 @@ class BillsController < ApplicationController
     
       def update
         if @bill.update(bill_params)
-          render :show, status: :ok, location: @bill
+          render json: @bill
+          # render :show, status: :ok, location: @bill
         else 
           render json: @bill.errors, status: unprocessable_entity
         end
@@ -27,14 +32,15 @@ class BillsController < ApplicationController
     
       def destroy
         @bill.destroy
+        render json: @bill
       end
     
       private 
         def set_bills
-          @bill = bill.find(params[:id])
+          @bill = Bill.find(params[:id])
         end
     
         def bill_params
-          params.require(:bill).permit(:total_amount, :due_date, :name, :interval, :house_id)
+          params.require(:bill).permit(:total_amount, :due_date, :name, :interval, :household_id, split_bills_attributes: [:id, :bill_portion, :user_id, :bill_id ])
         end
 end

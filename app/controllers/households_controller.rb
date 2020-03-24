@@ -26,7 +26,7 @@ class HouseholdsController < ApplicationController
       render json: @household, status: :ok
       # render :show, status: :ok, location: @household
     else 
-      render json: @household.errors, status: unprocessable_entity
+      render json: @household.errors, status: :unprocessable_entity
     end
   end
 

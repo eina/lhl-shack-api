@@ -2,16 +2,19 @@ class SplitBillsController < ApplicationController
   before_action :set_split_bills, only: [:show, :update, :destroy]
         # GET /Split_bills
         def index 
-          @split_bills = Split_bill.all
+          @split_bills = SplitBill.all
+          render json: @split_bills
         end
       
         def show
+          render json: @split_bills
         end
       
         def create
-          @split_bill = Split_bill.new(split_bill_params)
+          @split_bill = SplitBill.new(split_bill_params)
           if @split_bill.save
-            render :show, status: :created, location: @split_bill
+            render json: @split_bills, status: :created
+            # render :show, status: :created, location: @split_bill
           else 
             render json: @split_bill.errors, status: :unprocessable_entity
           end
@@ -19,7 +22,8 @@ class SplitBillsController < ApplicationController
       
         def update
           if @split_bill.update(split_bill_params)
-            render :show, status: :ok, location: @split_bill
+            render json: @split_bills, status: :ok
+            # render :show, status: :ok, location: @split_bill
           else 
             render json: @split_bill.errors, status: unprocessable_entity
           end
@@ -27,11 +31,12 @@ class SplitBillsController < ApplicationController
       
         def destroy
           @split_bill.destroy
+          render json: @split_bills, status: :ok
         end
       
         private 
           def set_split_bills
-            @split_bill = split_bill.find(params[:id])
+            @split_bill = SplitBill.find(params[:id])
           end
       
           def split_bill_params
