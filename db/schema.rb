@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200324000041) do
+ActiveRecord::Schema.define(version: 20200324045527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,15 +62,6 @@ ActiveRecord::Schema.define(version: 20200324000041) do
 
   add_index "households", ["house_id"], name: "index_households_on_house_id", using: :btree
   add_index "households", ["user_id"], name: "index_households_on_user_id", using: :btree
-
-  create_table "housekeepings", force: :cascade do |t|
-    t.jsonb    "housekeeping_values"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.integer  "household_id"
-  end
-
-  add_index "housekeepings", ["household_id"], name: "index_housekeepings_on_household_id", using: :btree
 
   create_table "houses", id: :uuid, default: "gen_random_uuid()", force: :cascade do |t|
     t.datetime "created_at",                 null: false
@@ -124,7 +115,6 @@ ActiveRecord::Schema.define(version: 20200324000041) do
   add_foreign_key "documents", "households"
   add_foreign_key "households", "houses"
   add_foreign_key "households", "users"
-  add_foreign_key "housekeepings", "households"
   add_foreign_key "houses", "landlords"
   add_foreign_key "split_bills", "bills"
   add_foreign_key "split_bills", "users"

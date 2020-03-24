@@ -1,9 +1,9 @@
 class HousekeepingsController < ApplicationController
     before_action :housekeepings, only: [:show, :update, :destroy]
 
-  # GET /landlords
+  # GET /housekeepings
   def index 
-    @housekeepings = Landlord.all
+    @housekeepings = Housekeeping.all
     render json: @housekeepings
   end
 
@@ -34,10 +34,11 @@ class HousekeepingsController < ApplicationController
 
   private 
     def set_housekeepings
+
       @housekeeping = Housekeeping.find(params[:id])
     end
 
     def housekeeping_params
-      params.require(:housekeeping).permit(:housekeeping_values, :house_id)
+      params.require(:housekeeping).permit(:housekeeping_values, :household_id)
     end
 end
