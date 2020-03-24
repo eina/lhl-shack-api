@@ -11,10 +11,12 @@ class UsersController < ApplicationController
   
     def show
       household = Household.find_by(user_id: @user.id)      
-      # if @household.blank?       
+      if @household.blank?
+        render json: @user
+      else 
       @output = { user: @user, household: household.id }    
       render :show, status: :ok, location: @user
-            
+      end
     end
   
     def create

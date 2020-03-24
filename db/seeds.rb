@@ -23,13 +23,13 @@ puts "Generating test seed..."
 #   company: FFaker::Company.name
 # )
 
-# @user1 = User.create!(
-#   first_name: "Andy",
-#   last_name: "Lindsay",
-#   phone_number: FFaker::PhoneNumber.phone_number.to_s,
-#   email: "test@test.com",
-#   password: "test"
-# )
+@user1 = User.create!(
+  first_name: "Andy",
+  last_name: "Lindsay",
+  phone_number: FFaker::PhoneNumber.phone_number.to_s,
+  email: "test@test.com",
+  password: "test"
+)
 
 # @user2 = User.create!(
 #   first_name: "Travis",
@@ -87,7 +87,7 @@ puts "Generating test seed..."
 # )
 
 
-# puts "User records created: #{User.count}"
+puts "User records created: #{User.count}"
 # puts "Landlord records created: #{Landlord.count}"
 # puts "House records created: #{House.count}"
 # puts "Household records created: #{Household.count}"
