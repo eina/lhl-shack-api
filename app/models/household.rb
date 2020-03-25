@@ -1,6 +1,6 @@
 class Household < ActiveRecord::Base
   belongs_to :user
-  belongs_to :houses
+  belongs_to :house
   
   has_many :bills, foreign_key: "household_id"
   has_many :agreements, foreign_key: "household_id"

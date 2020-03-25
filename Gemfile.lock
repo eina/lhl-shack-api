@@ -975,7 +975,6 @@ GEM
     minitest (5.14.0)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
-    oj (3.10.5)
     pg (0.21.0)
     pgcrypto (0.4.1)
     rack (1.6.13)
@@ -1063,7 +1062,6 @@ DEPENDENCIES
   ffaker
   jbuilder (~> 2.0)
   jquery-rails
-  oj
   pg (~> 0.15)
   pgcrypto
   rails (= 4.2.6)
