@@ -13,7 +13,10 @@ class HouseholdsController < ApplicationController
   end
 
   def show    
-    render json: @household
+    # render json: @household
+    # render json: {household: @household, agreements: @household.agreements}
+    render json: @household, include: :agreements
+
   end
 
   def create
