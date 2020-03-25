@@ -3,8 +3,13 @@ class HouseholdsController < ApplicationController
 
   # GET /households
   def index 
-    @households = Household.all
-    render json: @households
+    house_id = params[:house_id]
+    if house_id.blank?
+      @households = Household.all
+    else
+      @households = Household.where(house_id: house_id)
+    end
+      render json: @households
   end
 
   def show    

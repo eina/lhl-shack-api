@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :bills, defaults: { format: :json }
     resources :split_bills, defaults: { format: :json }            
     resources :housekeepings, defaults: { format: :json }   
+    resources :resources, defaults: { format: :json }
   end
 
   

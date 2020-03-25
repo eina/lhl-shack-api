@@ -28,21 +28,32 @@ puts "test seed"
   last_name: "Lindsay",
   phone_number: FFaker::PhoneNumber.phone_number.to_s,
   email: "test@test.com",
-  password: "test"
+  password: "test",
+  avatar: "https://bit.ly/2WCN1Jy"
 )
 
 @user2 = User.create!(
   first_name: "Travis",
   last_name: "Borsa",
   phone_number: FFaker::PhoneNumber.phone_number.to_s,
-  email: "test@test.com",
-  password: "test"
+  email: "trav@coder.com",
+  password: "test",
+  avatar: "https://www.lighthouselabs.ca/uploads/team_member/avatar/371/medium_Headshot.png"
+)
+
+@user3 = User.create!(
+  first_name: "Bill",
+  last_name: "Withers",
+  phone_number: FFaker::PhoneNumber.phone_number.to_s,
+  email: "bill@email.com",
+  password: "test",
+  avatar: "https://api.adorable.io/avatars/285/abott@adorable.png"
 )
 
 @house = House.create!(
   total_rent_amt: 2000,
   total_security_deposit_amt: 1000,
-  address: "#{FFaker::AddressCA.street_address}, #{FFaker::AddressCA.city}, #{FFaker::AddressCA.province}, #{FFaker::AddressCA.postal_code}",
+  address: "2465 Kensington Cres, Port Coquitam, BC, Canada",
   number_of_rooms: 2,
   number_of_bathrooms: 1,
   pet_friendly: FFaker::Boolean.maybe,
@@ -52,11 +63,28 @@ puts "test seed"
   landlord_id: @landlord.id
 )
 
+@house2 = House.create!(
+  total_rent_amt: 1000,
+  total_security_deposit_amt: 500,
+  address: "#{FFaker::AddressCA.street_address}, #{FFaker::AddressCA.city}, #{FFaker::AddressCA.province}, #{FFaker::AddressCA.postal_code}",
+  number_of_rooms: 1,
+  number_of_bathrooms: 1,
+  pet_friendly: FFaker::Boolean.maybe,
+  smoking_allowed: FFaker::Boolean.maybe,
+  start_date: Date.parse("2019-07-01"),
+  end_date: Date.parse("2020-07-01"),
+  landlord_id: @landlord.id
+)
+
 @household = @user1.households.create!(
   house_id: @house.id
 )
 @user2.households.create!(
   house_id: @house.id
+)
+
+@user3.households.create!(
+  house_id: @house2.id
 )
 
 Agreement.create!(
