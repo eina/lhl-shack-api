@@ -5,15 +5,27 @@ class UsersController < ApplicationController
 
     # GET /Users
     def index 
-      @users = User.all
+      email = params[:email]
+      household = params[:household_id]      
+
+      if email.blank?
+        @users = User.all
+      else
+        @users = User.where(email: email)
+      end
       render json: @users
     end
   
     def show
-      household = Household.find_by(user_id: @user.id)      
-      # if @household.blank?       
-      @output = { user: @user, household: household.id }    
-      render :show, status: :ok, location: @user
+      household = Household.find_by(user_id: @user.id)            
+      if household.blank?
+        render json: @user
+      else
+        house = House.find(household.house_id)
+        landlord = Landlord.find(house.landlord_id)      
+        @output = { user: @user, household: household.id, house: house.id, landlord: landlord.id }    
+        render :show, status: :ok, location: @user
+      end
     end
   
     def create
@@ -35,6 +47,7 @@ class UsersController < ApplicationController
   
     def destroy
       @user.destroy
+      render json: @user, status: :ok
     end
   
     private 

@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200324004015) do
-
+ActiveRecord::Schema.define(version: 20200324223415) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
@@ -24,6 +23,7 @@ ActiveRecord::Schema.define(version: 20200324004015) do
     t.boolean  "is_complete"
     t.boolean  "is_expired"
     t.integer  "household_id"
+    t.text     "html_string"
   end
 
   add_index "agreements", ["household_id"], name: "index_agreements_on_household_id", using: :btree
@@ -36,9 +36,13 @@ ActiveRecord::Schema.define(version: 20200324004015) do
     t.string   "name"
     t.string   "interval"
     t.integer  "household_id"
+    t.integer  "user_amount"
+    t.string   "bill_uuid"
+    t.integer  "user_id"
   end
 
   add_index "bills", ["household_id"], name: "index_bills_on_household_id", using: :btree
+  add_index "bills", ["user_id"], name: "index_bills_on_user_id", using: :btree
 
   create_table "documents", force: :cascade do |t|
     t.datetime "created_at",    null: false
@@ -52,21 +56,16 @@ ActiveRecord::Schema.define(version: 20200324004015) do
   create_table "households", force: :cascade do |t|
     t.integer  "user_id"
     t.uuid     "house_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.boolean  "is_active"
+    t.jsonb    "housekeeping"
   end
 
   add_index "households", ["house_id"], name: "index_households_on_house_id", using: :btree
   add_index "households", ["user_id"], name: "index_households_on_user_id", using: :btree
-
-  create_table "housekeepings", force: :cascade do |t|
-    t.jsonb    "housekeeping_values"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.integer  "household_id"
-  end
-
-  add_index "housekeepings", ["household_id"], name: "index_housekeepings_on_household_id", using: :btree
 
   create_table "houses", id: :uuid, default: "gen_random_uuid()", force: :cascade do |t|
     t.datetime "created_at",                 null: false
@@ -78,8 +77,6 @@ ActiveRecord::Schema.define(version: 20200324004015) do
     t.integer  "number_of_bathrooms"
     t.boolean  "pet_friendly"
     t.boolean  "smoking_allowed"
-    t.date     "start_date"
-    t.date     "end_date"
     t.integer  "landlord_id",                null: false
   end
 
@@ -96,17 +93,6 @@ ActiveRecord::Schema.define(version: 20200324004015) do
     t.string   "address"
   end
 
-  create_table "split_bills", force: :cascade do |t|
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "bill_portion"
-    t.integer  "user_id",      null: false
-    t.integer  "bill_id",      null: false
-  end
-
-  add_index "split_bills", ["bill_id"], name: "index_split_bills_on_bill_id", using: :btree
-  add_index "split_bills", ["user_id"], name: "index_split_bills_on_user_id", using: :btree
-
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -118,13 +104,13 @@ ActiveRecord::Schema.define(version: 20200324004015) do
     t.string   "avatar"
   end
 
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+
   add_foreign_key "agreements", "households"
   add_foreign_key "bills", "households"
+  add_foreign_key "bills", "users"
   add_foreign_key "documents", "households"
   add_foreign_key "households", "houses"
   add_foreign_key "households", "users"
-  add_foreign_key "housekeepings", "households"
   add_foreign_key "houses", "landlords"
-  add_foreign_key "split_bills", "bills"
-  add_foreign_key "split_bills", "users"
 end

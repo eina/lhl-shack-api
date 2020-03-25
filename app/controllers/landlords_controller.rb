@@ -32,6 +32,7 @@ class LandlordsController < ApplicationController
 
   def destroy
     @landlord.destroy
+    render json: @landlords, status: :ok
   end
 
   private 
@@ -40,6 +41,6 @@ class LandlordsController < ApplicationController
     end
 
     def landlord_params
-      params.require(:landlord).permit(:first_name, :last_name, :phone_number, :email, :address)
+      params.require(:landlord).permit(:first_name, :last_name, :phone_number, :email, :address, :company)
     end
 end

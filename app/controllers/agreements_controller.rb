@@ -1,8 +1,14 @@
 class AgreementsController < ApplicationController
   before_action :set_agreements, only: [:show, :update, :destroy]
     # GET /Agreements
-    def index             
-      @agreements = Agreement.all
+    def index        
+      household_id = params[:household_id]      
+      if household_id.blank?
+        @agreements = Agreement.all
+      else 
+        # GET /api/agreements?household_id=params[:household_id]
+        @agreements = Agreement.find_by(household_id: household_id)
+      end
       render json: @agreements      
     end
   
@@ -12,9 +18,9 @@ class AgreementsController < ApplicationController
   
     def create
       @agreement = Agreement.new(agreement_params)
+      # raise @agreement.inspect
       if @agreement.save
         render json: @agreement, status: :created
-        # render :show, status: :created, location: @agreement
       else 
         render json: @agreement.errors, status: :unprocessable_entity
       end
@@ -36,7 +42,7 @@ class AgreementsController < ApplicationController
   
     private 
       def set_agreements                        
-        house_agreement = Agreement.find_by(household_id: params[:id])
+        house_agreement = Agreement.where(household_id: params[:id])
         if house_agreement.blank?
           @agreement = Agreement.find(params[:id])
         else
@@ -46,6 +52,6 @@ class AgreementsController < ApplicationController
       end
   
       def agreement_params
-        params.require(:agreement).permit(:form_values, :is_complete, :is_expired, :household_id)
+        params.require(:agreement).permit(:household_id, :form_values, :is_complete, :is_expired, :html_string)
       end
 end

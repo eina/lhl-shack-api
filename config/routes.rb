@@ -12,8 +12,7 @@ Rails.application.routes.draw do
     # get 'agreements/:uuid' => 'agreements#show', :as => :agreements
     resources :bills, defaults: { format: :json }
     resources :split_bills, defaults: { format: :json }            
-    resources :housekeepings, defaults: { format: :json }   
-    resources :resources, defaults: { format: :json }
+    # resources :housekeepings, defaults: { format: :json }   
   end
 
   

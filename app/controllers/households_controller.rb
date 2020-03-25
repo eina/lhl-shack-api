@@ -31,7 +31,7 @@ class HouseholdsController < ApplicationController
       render json: @household, status: :ok
       # render :show, status: :ok, location: @household
     else 
-      render json: @household.errors, status: unprocessable_entity
+      render json: @household.errors, status: :unprocessable_entity
     end
   end
 
@@ -45,6 +45,6 @@ class HouseholdsController < ApplicationController
     end
 
     def household_params
-      params.require(:household).permit(:user_id, :house_id)
+      params.require(:household).permit(:user_id, :house_id, :is_active, :start_date, :end_date, :housekeeping)
     end
 end
