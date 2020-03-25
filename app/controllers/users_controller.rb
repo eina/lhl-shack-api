@@ -6,6 +6,8 @@ class UsersController < ApplicationController
     # GET /Users
     def index 
       email = params[:email]
+      household = params[:household_id]      
+
       if email.blank?
         @users = User.all
       else

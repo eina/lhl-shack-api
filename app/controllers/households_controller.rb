@@ -2,7 +2,7 @@ class HouseholdsController < ApplicationController
   before_action :set_households, only: [:show, :update, :destroy]
 
   # GET /households
-  def index 
+  def index     
     @households = Household.all
     render json: @households
   end
