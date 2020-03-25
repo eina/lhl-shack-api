@@ -28,7 +28,8 @@ puts "test seed"
   last_name: "Lindsay",
   phone_number: FFaker::PhoneNumber.phone_number.to_s,
   email: "test@test.com",
-  password: "test"
+  password: "test",
+  avatar: "https://bit.ly/2WCN1Jy"
 )
 
 @user2 = User.create!(
@@ -36,7 +37,8 @@ puts "test seed"
   last_name: "Borsa",
   phone_number: FFaker::PhoneNumber.phone_number.to_s,
   email: "trav@coder.com",
-  password: "test"
+  password: "test",
+  avatar: "https://www.lighthouselabs.ca/uploads/team_member/avatar/371/medium_Headshot.png"
 )
 
 @user3 = User.create!(
@@ -44,13 +46,14 @@ puts "test seed"
   last_name: "Withers",
   phone_number: FFaker::PhoneNumber.phone_number.to_s,
   email: "bill@email.com",
-  password: "test"
+  password: "test",
+  avatar: "https://api.adorable.io/avatars/285/abott@adorable.png"
 )
 
 @house = House.create!(
   total_rent_amt: 2000,
   total_security_deposit_amt: 1000,
-  address: "#{FFaker::AddressCA.street_address}, #{FFaker::AddressCA.city}, #{FFaker::AddressCA.province}, #{FFaker::AddressCA.postal_code}",
+  address: "2465 Kensington Cres, Port Coquitam, BC, Canada",
   number_of_rooms: 2,
   number_of_bathrooms: 1,
   pet_friendly: FFaker::Boolean.maybe,
