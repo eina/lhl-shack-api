@@ -11,11 +11,11 @@ class AgreementsController < ApplicationController
         # GET /api/agreements?household_id=params[:household_id]
         @agreements = Agreement.find_by(household_id: household_id)
       end
-      render json: @agreements      
+      render json: @agreements.as_json(except: [:html_string])      
     end
   
     def show      
-      render json: @agreement
+      render json: @agreement.as_json(except: [:html_string])
     end
   
     def create
@@ -31,7 +31,7 @@ class AgreementsController < ApplicationController
           # generate pdf          
           pdf = WickedPdf.new.pdf_from_string(agreement_params[:html_string])
           timestamp = Time.now.utc.strftime("%Y%m%d%H%M%S")
-          filename = "agreement-#{timestamp}.pdf"
+          filename = "#{params[:household_id]}/agreements/agreement-#{timestamp}.pdf"
           # can i do "household1/filename" hmmm 
           link = "#{ENV['CLOUDFRONT_URL']}/#{filename}"                  
 
@@ -43,10 +43,10 @@ class AgreementsController < ApplicationController
             # should probably save this link to the model lol
             render json: { link: link }, status: :created
           else 
-            render json: @agreement, status: :created
+            render json: @agreement.as_json(except: [:html_string]), status: :created
           end
         else 
-          render json: @agreement, status: :created
+          render json: @agreement.as_json(except: [:html_string]), status: :created
         end
                                           
         # render :show, status: :created, location: @agreement
@@ -65,7 +65,7 @@ class AgreementsController < ApplicationController
           # generate pdf          
           pdf = WickedPdf.new.pdf_from_string(agreement_params[:html_string])
           timestamp = Time.now.utc.strftime("%Y%m%d%H%M%S")
-          filename = "agreement-#{timestamp}.pdf"
+          filename = "#{params[:household_id]}/agreements/agreement-#{timestamp}.pdf"
           # can i do "household1/filename" hmmm 
           link = "#{ENV['CLOUDFRONT_URL']}/#{filename}"                  
 
@@ -77,10 +77,11 @@ class AgreementsController < ApplicationController
             # should probably save this link to the model lol
             render json: { link: link }, status: :created
           else 
-            render json: @agreement, status: :created
+            render json: @agreement.as_json(except: [:html_string]), status: :created
           end
         end
-          # render :show, status: :ok, location: @agreement        
+        render json: @agreement.as_json(except: [:html_string]), status: :created
+
       else 
         render json: @agreement.errors, status: unprocessable_entity
       end
@@ -88,7 +89,7 @@ class AgreementsController < ApplicationController
   
     def destroy
       @agreement.destroy
-      render json: @agreement, status: :ok
+      render json: @agreement.as_json(except: [:html_string]), status: :ok
     end
   
     private 
