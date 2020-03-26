@@ -66,7 +66,7 @@ class AgreementsController < ApplicationController
           pdf = WickedPdf.new.pdf_from_string(agreement_params[:html_string])
           timestamp = Time.now.utc.strftime("%Y%m%d%H%M%S")
           filename = "#{params[:household_id]}/agreements/agreement-#{timestamp}.pdf"
-          # can i do "household1/filename" hmmm 
+          
           link = "#{ENV['CLOUDFRONT_URL']}/#{filename}"                  
 
           # upload to S3
