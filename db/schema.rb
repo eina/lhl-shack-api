@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20200326210300) do
     t.datetime "updated_at",    null: false
     t.string   "s3_identifier"
     t.integer  "household_id"
+    t.string   "file_name"
   end
 
   add_index "documents", ["household_id"], name: "index_documents_on_household_id", using: :btree
