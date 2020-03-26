@@ -79,8 +79,7 @@ class AgreementsController < ApplicationController
           else 
             render json: @agreement.as_json(except: [:html_string]), status: :created
           end
-        end
-        render json: @agreement.as_json(except: [:html_string]), status: :created
+        end        
 
       else 
         render json: @agreement.errors, status: unprocessable_entity
