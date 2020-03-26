@@ -4,10 +4,13 @@ class HouseholdsController < ApplicationController
   # GET /households
   def index 
     house_id = params[:house_id]
-    if house_id.blank?
-      @households = Household.all
+
+    if params.values_at(:house_id, :user_id).all?(&:present?)
+      @households = Household.filter_household_by_house_and_user(params)
+    elsif params.values_at(:house_id).all?(&:present?)
+      @households = Household.filter_households_by_house(params)
     else
-      @households = Household.where(house_id: house_id)
+      @households = Household.all
     end
       render json: @households
   end

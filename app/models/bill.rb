@@ -9,7 +9,7 @@ class Bill < ActiveRecord::Base
   validates_presence_of :total_amount, :due_date, :name, :interval, :household_id, :user_amount, :bill_uuid, :user_id
 
   scope :filter_bill_by_user, lambda { |params|
-    where({ household_id: params[:household_id], user_id: params[:user_id]} )
+    where({ household_id: params[:household_id], user_id: params[:user_id]})
   }
   
   scope :filter_bill_by_household_and_bill_uuid, lambda { |params| 

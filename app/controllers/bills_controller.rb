@@ -14,7 +14,7 @@ class BillsController < ApplicationController
       @bills = Bill.filter_user_single_bill(params)
     elsif  params.values_at(:household_id, :bill_uuid).all?(&:present?)
       @bills = Bill.filter_bill_by_household_and_bill_uuid(params)
-    elsif  params.values_at(:household_id, :user_id).all?(&:present?)
+    elsif params.values_at(:household_id, :user_id).all?(&:present?)
       @bills = Bill.filter_bill_by_user(params)
     else             
       @bills = Bill.all
