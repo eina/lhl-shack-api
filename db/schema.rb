@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200324223415) do
+ActiveRecord::Schema.define(version: 20200326210300) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
@@ -39,6 +40,8 @@ ActiveRecord::Schema.define(version: 20200324223415) do
     t.integer  "user_amount"
     t.string   "bill_uuid"
     t.integer  "user_id"
+    t.string   "user_status"
+    t.string   "bill_status"
   end
 
   add_index "bills", ["household_id"], name: "index_bills_on_household_id", using: :btree

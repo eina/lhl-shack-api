@@ -57,6 +57,6 @@ class BillsController < ApplicationController
     end
 
   def bill_params
-    params.require(:bill).permit(:total_amount, :due_date, :name, :interval, :user_amount, :household_id, :user_id, :bill_uuid)
+    params.require(:bill).permit(:total_amount, :due_date, :name, :interval, :user_amount, :household_id, :user_id, :bill_uuid, :user_status, :bill_status)
   end
 end
