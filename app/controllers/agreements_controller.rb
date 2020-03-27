@@ -31,8 +31,12 @@ class AgreementsController < ApplicationController
       obj = s3.bucket(ENV['S3_BUCKET']).object(filename)
       obj.put(body: pdf)
 
-      # save link here 
+      # @agreement.update({ pdf_link: link})
 
+      # save link here 
+      if @agreement.update({ pdf_link: link})
+        render json: @agreement.as_json(except: [:html_string])
+      end
     end
   
     def create
@@ -43,28 +47,11 @@ class AgreementsController < ApplicationController
       if @agreement.save
         # if html string isn't blank
         if (!is_html_string)
-          s3 = Aws::S3::Resource.new(region:'us-west-2')
-          
-          # generate pdf          
-          pdf = WickedPdf.new.pdf_from_string(agreement_params[:html_string])
-          timestamp = Time.now.utc.strftime("%Y%m%d%H%M%S")
-          filename = "#{params[:household_id]}/agreements/agreement-#{timestamp}.pdf"          
-          link = "#{ENV['CLOUDFRONT_URL']}/#{filename}"                  
-
-          # upload to S3
-          obj = s3.bucket(ENV['S3_BUCKET']).object(filename)
-          obj.put(body: pdf)
-
-          if (obj.exists? == true)
-            # should probably save this link to the model lol
-            render json: { link: link }, status: :created
-          else 
-            render json: @agreement.as_json(except: [:html_string]), status: :created
-          end
+          self.generate_pdf()
         else 
-          render json: @agreement.as_json(except: [:html_string]), status: :created
+          render json: @agreement.as_json(except: [:html_string]), status: :created                                          
         end
-                                          
+        # render json: @agreement.as_json(except: [:html_string]), status: :created                                          
         # render :show, status: :created, location: @agreement
       else 
         render json: @agreement.errors, status: :unprocessable_entity
@@ -76,29 +63,12 @@ class AgreementsController < ApplicationController
       if @agreement.update(agreement_params)
         # if html string isn't blank
         if (!is_html_string)
-          s3 = Aws::S3::Resource.new(region:'us-west-2')
-          
-          # generate pdf          
-          pdf = WickedPdf.new.pdf_from_string(agreement_params[:html_string])
-          timestamp = Time.now.utc.strftime("%Y%m%d%H%M%S")
-          filename = "#{params[:household_id]}/agreements/agreement-#{timestamp}.pdf"
-          
-          link = "#{ENV['CLOUDFRONT_URL']}/#{filename}"                  
-
-          # upload to S3
-          obj = s3.bucket(ENV['S3_BUCKET']).object(filename)
-          obj.put(body: pdf)
-
-          if (obj.exists? == true)
-            # should probably save this link to the model lol
-            render json: { link: link }, status: :created
-          else 
-            render json: @agreement.as_json(except: [:html_string]), status: :created
-          end
+          # raise "hello!!!!".inspect
+          self.generate_pdf()
+        else 
+          render json: @agreement.as_json(except: [:html_string]), status: :ok      
         end
-
-        render json: @agreement.as_json(except: [:html_string]), status: :created
-
+        # render json: @agreement.as_json(except: [:html_string]), status: :created
       else 
         render json: @agreement.errors, status: unprocessable_entity
       end
@@ -121,6 +91,6 @@ class AgreementsController < ApplicationController
       end
   
       def agreement_params
-        params.require(:agreement).permit(:household_id, :form_values, :is_complete, :is_expired, :html_string)
+        params.require(:agreement).permit(:household_id, :form_values, :is_complete, :is_expired, :html_string, :pdf_link)
       end
 end
