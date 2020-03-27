@@ -5,7 +5,7 @@ class Household < ActiveRecord::Base
   has_many :bills, foreign_key: "household_id"
   has_many :agreements, foreign_key: "household_id"
   
-  validates_presence_of :user_id, :house_id, :start_date, :end_date, :is_active
+  validates_presence_of :user_id, :house_id
 
   scope :filter_households_by_house, lambda { |params| 
     where({ house: params[:house_id] })

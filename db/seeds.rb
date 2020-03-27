@@ -53,8 +53,8 @@ puts "Generating test seed..."
 
 @household = @user1.households.create!(
   house_id: @house.id,
-  start_date: Date.parse("2019-08-01"),
-  end_date: Date.parse("2020-08-01"),
+  # start_date: Date.parse("2019-08-01"),
+  # end_date: Date.parse("2020-08-01"),
   is_active: true
 )
 
