@@ -56,7 +56,7 @@ class AgreementsController < ApplicationController
     end
   
     def update
-      is_html_string =  agreement_params[:html_string].blank?    
+      is_html_string =  agreement_params[:html_string].blank?          
       if @agreement.update(agreement_params)
         # if html string isn't blank
         if (!is_html_string)
@@ -79,7 +79,9 @@ class AgreementsController < ApplicationController
           else 
             render json: @agreement.as_json(except: [:html_string]), status: :created
           end
-        end        
+        end
+
+        render json: @agreement.as_json(except: [:html_string]), status: :created
 
       else 
         render json: @agreement.errors, status: unprocessable_entity
