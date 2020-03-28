@@ -31,7 +31,7 @@ class AgreementsController < ApplicationController
       obj = s3.bucket(ENV['S3_BUCKET']).object(filename)
       obj.put(body: pdf)
 
-      # @agreement.update({ pdf_link: link})
+      @agreement.update({ pdf_link: link})
 
       # save link here 
       if @agreement.update({ pdf_link: link})
