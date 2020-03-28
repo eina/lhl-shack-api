@@ -17,10 +17,13 @@ class UsersController < ApplicationController
     end
   
     def show
-      household = Household.find_by(user_id: @user.id)            
-      if household.blank?
+      # joining table between users and household
+      user_household = Renter.find_by(user_id: @user.id)
+      # raise user_household.inspect
+      if user_household.blank?
         render json: @user
-      else
+      else        
+        household = Household.find(user_household.household_id)
         house = House.find(household.house_id)
         landlord = Landlord.find(house.landlord_id)      
         @output = { user: @user, household: household.id, house: house.id, landlord: landlord.id }    
