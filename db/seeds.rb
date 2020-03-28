@@ -51,12 +51,12 @@ puts "Generating test seed..."
   landlord_id: @landlord.id
 )
 
-@household = @user1.households.create!(
-  house_id: @house.id,
-  # start_date: Date.parse("2019-08-01"),
-  # end_date: Date.parse("2020-08-01"),
-  is_active: true
-)
+# @household = @user1.households.create!(
+#   house_id: @house.id,
+#   # start_date: Date.parse("2019-08-01"),
+#   # end_date: Date.parse("2020-08-01"),
+#   is_active: true
+# )
 
 # @user2.households.create!(
 #   house_id: @house.id
@@ -93,7 +93,7 @@ puts "Generating test seed..."
 puts "User records created: #{User.count}"
 puts "Landlord records created: #{Landlord.count}"
 puts "House records created: #{House.count}"
-puts "Household records created: #{Household.count}"
+# puts "Household records created: #{Household.count}"
 # puts "Agreement records created: #{Agreement.count}"
 # puts "Bill records created: #{Bill.count}"
 # puts "SplitBill records created: #{SplitBill.count}"
