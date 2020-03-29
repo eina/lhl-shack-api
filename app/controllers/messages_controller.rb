@@ -3,8 +3,10 @@ class MessagesController < ApplicationController
 
   # GET /messages
   def index 
-    if params.values_at(:household_id).all?(&:present?) 
-      @messages = Message.filter_by_household(params)
+    if params.values_at(:household_id,:limit_by).all?(&:present?) 
+      @messages = Message.filter_by_household_with_limit(params)
+    elsif params.values_at(:household_id).all?(&:present?) 
+      @messages = Message.filter_by_household(params)    
     else
       @messages = Message.all
     end
@@ -49,6 +51,6 @@ class MessagesController < ApplicationController
     end
 
     def message_params
-      params.require(:message).permit(:messages, :author, :household_id)
+      params.require(:message).permit(:message_text, :message_title, :author, :household_id)
     end  
 end
