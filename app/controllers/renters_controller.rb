@@ -4,7 +4,9 @@ class RentersController < ApplicationController
   # GET /renters
   # GET /renters.json
   def index
-    if params.values_at(:household_id).all?(&:present?)
+    if params.values_at(:household_id, :user_id).all?(&:present?)
+      @renters = Renter.filter_by_household_and_user(params)
+    elsif params.values_at(:household_id).all?(&:present?)
       @renters = Renter.filter_by_household(params)
     else 
       @renters = Renter.all
@@ -27,26 +29,22 @@ class RentersController < ApplicationController
   # POST /renters.json
   def create
     @renter = Renter.new(renter_params)
-
-    respond_to do |format|
-      if @renter.save
-        render json: @renter, status: :created        
-      else
-        render json: @renter.errors, status: :unprocessable_entity
-      end
-    end
+    
+    if @renter.save
+      render json: @renter, status: :created        
+    else
+      render json: @renter.errors, status: :unprocessable_entity
+    end    
   end
 
   # PATCH/PUT /renters/1
   # PATCH/PUT /renters/1.json
-  def update
-    respond_to do |format|
-      if @renter.update(renter_params)
-        render json: @renter, status: :created
-      else
-        render json: @renter.errors, status: :unprocessable_entity
-      end
-    end
+  def update    
+    if @renter.update(renter_params)
+      render json: @renter, status: :created
+    else
+      render json: @renter.errors, status: :unprocessable_entity
+    end    
   end
 
   # DELETE /renters/1

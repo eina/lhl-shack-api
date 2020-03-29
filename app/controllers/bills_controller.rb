@@ -14,8 +14,10 @@ class BillsController < ApplicationController
       @bills = Bill.filter_user_single_bill(params)
     elsif  params.values_at(:household_id, :bill_uuid).all?(&:present?)
       @bills = Bill.filter_bill_by_household_and_bill_uuid(params)
+    elsif params.values_at(:date_to_check, :household_id, :user_id).all?(&:present?)
+      @bills = Bill.filter_bill_due_soon(params)      
     elsif params.values_at(:household_id, :user_id).all?(&:present?)
-      @bills = Bill.filter_bill_by_user(params)
+      @bills = Bill.filter_bill_by_user(params)    
     else             
       @bills = Bill.all
     end
@@ -30,7 +32,7 @@ class BillsController < ApplicationController
     @bill = Bill.new(bill_params)
     # @bill.split_bills.build        
     if @bill.save
-      render json: @bill
+      render json: @bill, status: :created
       # render :show, status: :created, location: @bill
     else 
       render json: @bill.errors, status: :unprocessable_entity
