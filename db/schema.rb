@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200328234152) do
+ActiveRecord::Schema.define(version: 20200329070711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,16 @@ ActiveRecord::Schema.define(version: 20200328234152) do
     t.string   "address"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text     "messages"
+    t.string   "author"
+    t.integer  "household_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "messages", ["household_id"], name: "index_messages_on_household_id", using: :btree
+
   create_table "renters", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "household_id"
@@ -125,6 +135,7 @@ ActiveRecord::Schema.define(version: 20200328234152) do
   add_foreign_key "documents", "households"
   add_foreign_key "households", "houses"
   add_foreign_key "houses", "landlords"
+  add_foreign_key "messages", "households"
   add_foreign_key "renters", "households"
   add_foreign_key "renters", "users"
 end

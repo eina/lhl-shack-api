@@ -5,6 +5,7 @@ class Household < ActiveRecord::Base
   has_many :bills, foreign_key: "household_id"
   has_many :agreements, foreign_key: "household_id"
   has_many :renters, foreign_key: "household_id"
+  has_many :messages, foreign_key: "household_id"
   
   validates_presence_of :house_id
   # validates_presence_of :user_id, :house_id

@@ -9,11 +9,9 @@ Rails.application.routes.draw do
     resources :houses, defaults: { format: :json }
     resources :households, defaults: { format: :json }
     resources :renters, defaults: { format: :json }
-    resources :agreements, defaults: { format: :json }
-    # get 'agreements/:uuid' => 'agreements#show', :as => :agreements
+    resources :agreements, defaults: { format: :json }    
     resources :bills, defaults: { format: :json }
-    # resources :split_bills, defaults: { format: :json }
-    # resources :housekeepings, defaults: { format: :json }   
+    resources :messages, defaults: { format: :json }    
   end
 
   
