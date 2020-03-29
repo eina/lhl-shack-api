@@ -3,14 +3,20 @@ class MessagesController < ApplicationController
 
   # GET /messages
   def index 
-    @messages = Message.all
+    if params.values_at(:household_id).all?(&:present?) 
+      @messages = Message.filter_by_household(params)
+    else
+      @messages = Message.all
+    end
     render json: @messages
   end
 
+  # GET /messages/1
   def show
     render json: @message
   end
 
+  # POST /messages
   def create
     @message = Message.new(message_params)
     if @message.save
@@ -21,6 +27,8 @@ class MessagesController < ApplicationController
     end
   end
 
+  # PATCH /messages/1
+  # PUT 
   def update
     if @message.update(message_params)
       render json: @message, status: :ok
@@ -41,6 +49,6 @@ class MessagesController < ApplicationController
     end
 
     def message_params
-      params.require(:message).permit(:message, :author, :household_id)
+      params.require(:message).permit(:messages, :author, :household_id)
     end  
 end
