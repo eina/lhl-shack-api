@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :bills, foreign_key: "user_id"
   has_many :households, foreign_key: "user_id"
   has_many :houses, through: :households, foreign_key: "user_id"
+  has_many :renters, foreign_key: "user_id"
   
   validates_presence_of :first_name, :last_name, :phone_number, :email, :password
   # validates_uniqueness_of :email

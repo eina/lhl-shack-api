@@ -4,7 +4,11 @@ class RentersController < ApplicationController
   # GET /renters
   # GET /renters.json
   def index
-    @renters = Renter.all
+    if params.values_at(:household_id).all?(&:present?)
+      @renters = Renter.filter_by_household(params)
+    else 
+      @renters = Renter.all
+    end
     render json: @renters
   end
 
