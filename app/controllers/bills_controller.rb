@@ -15,7 +15,7 @@ class BillsController < ApplicationController
     elsif  params.values_at(:household_id, :bill_uuid).all?(&:present?)
       @bills = Bill.filter_bill_by_household_and_bill_uuid(params)
     elsif params.values_at(:date_to_check, :household_id, :user_id).all?(&:present?)
-      @bills = Bill.filter_bill_due_soon(params)      
+      @bills = Bill.filter_unpaid_bill_due_soon(params)      
     elsif params.values_at(:household_id, :user_id).all?(&:present?)
       @bills = Bill.filter_bill_by_user(params)    
     else             

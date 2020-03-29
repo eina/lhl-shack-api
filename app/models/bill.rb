@@ -16,8 +16,8 @@ class Bill < ActiveRecord::Base
     where({ household_id: params[:household_id], bill_uuid: params[:bill_uuid] })
   }
 
-  scope :filter_bill_due_soon, lambda { |params|        
-    where("due_date >= ? AND household_id = ? AND user_id = ?", params[:date_to_check], params[:household_id], params[:user_id]).order("due_date ASC").limit(1)
+  scope :filter_unpaid_bill_due_soon, lambda { |params|        
+    where("due_date >= ? AND user_status = 'unpaid' AND household_id = ? AND user_id = ?", params[:date_to_check], params[:household_id], params[:user_id]).order("due_date ASC").limit(1)
   }
 
   # filter bill by user & household & bill_uuid
