@@ -24,10 +24,10 @@ puts "Generating test seed..."
 )
 
 @user1 = User.create!(
-  first_name: "Andy",
-  last_name: "Lindsay",
-  phone_number: "876-237-2519",
-  email: "test@test.com",
+  first_name: "Eina",
+  last_name: "Onting",
+  phone_number: "604-123-4567",
+  email: "eina@test.com",
   password: "test",
   avatar: "https://bit.ly/2WCN1Jy"
 )
