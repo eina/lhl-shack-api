@@ -1,6 +1,6 @@
 # shack API
 
-This is the API for shack, an app for a more harmonious roommate experience built as a capstone project for Lighthosue Labs.
+This is the API for [shack](https://github.com/thelittleblacksmith/lhl-shack), an app for a more harmonious roommate experience built as a capstone project for Lighthosue Labs.
 
 ## Details
 
